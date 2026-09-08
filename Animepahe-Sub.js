@@ -2,7 +2,7 @@ async function searchResults(keyword) {
     try {
         const encodedKeyword = encodeURIComponent(keyword);
         const ddosInterceptor = new DdosGuardInterceptor();
-        const responseText = await ddosInterceptor.fetchWithBypass(`https://animepahe.com/api?m=search&q=${encodedKeyword}`);
+        const responseText = await ddosInterceptor.fetchWithBypass(`https://animepahe.pw/api?m=search&q=${encodedKeyword}`);
         const dataText = await responseText.text();
         console.log(dataText);
         const data = JSON.parse(dataText);
@@ -10,7 +10,7 @@ async function searchResults(keyword) {
             return {
                 title: result.title,
                 image: result.poster,
-                href: `https://animepahe.com/anime/${result.session}`
+                href: `https://animepahe.pw/anime/${result.session}`
             };
         });
 
@@ -60,14 +60,14 @@ async function extractEpisodes(url) {
         const ddosInterceptor = new DdosGuardInterceptor();  
 
         let page = 1;
-        const apiUrl1 = `https://animepahe.com/api?m=release&id=${id}&sort=episode_asc&page=${page}`;
+        const apiUrl1 = `https://animepahe.pw/api?m=release&id=${id}&sort=episode_asc&page=${page}`;
         const response1 = await ddosInterceptor.fetchWithBypass(apiUrl1);
         const dataText1 = await response1.text();
         const data1 = JSON.parse(dataText1);
 
         for (const item of data1.data) {
             results.push({
-                href: `https://animepahe.com/play/${id}/${item.session}`,
+                href: `https://animepahe.pw/play/${id}/${item.session}`,
                 number: item.episode
             });
         }
@@ -81,7 +81,7 @@ async function extractEpisodes(url) {
                     let retries = 0;
                     while (!pageData && retries < 3) {
                         try {
-                            const apiUrl = `https://animepahe.com/api?m=release&id=${id}&sort=episode_asc&page=${pageNum}`;
+                            const apiUrl = `https://animepahe.pw/api?m=release&id=${id}&sort=episode_asc&page=${pageNum}`;
                             const response = await ddosInterceptor.fetchWithBypass(apiUrl);
                             const dataText = await response.text();
                             pageData = JSON.parse(dataText);
@@ -101,7 +101,7 @@ async function extractEpisodes(url) {
                 if (pageData && pageData.data) {
                     for (const item of pageData.data) {
                         results.push({
-                            href: `https://animepahe.com/play/${id}/${item.session}`,
+                            href: `https://animepahe.pw/play/${id}/${item.session}`,
                             number: item.episode
                         });
                     }
