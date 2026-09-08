@@ -87,9 +87,6 @@ async function extractEpisodes(url) {
                             pageData = JSON.parse(dataText);
                         } catch (pageErr) {
                             retries++;
-                            if (retries < 3) {
-                                await new Promise(resolve => setTimeout(resolve, 500));
-                            }
                         }
                     }
                     return pageData;
